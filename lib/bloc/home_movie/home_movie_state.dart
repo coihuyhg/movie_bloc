@@ -4,19 +4,16 @@ part of 'home_movie_cubit.dart';
 class HomeMovieState extends Equatable {
   LoadStatus? loadStatus;
   MovieResponse? movie;
-  Result? result;
 
-  HomeMovieState({this.loadStatus, this.movie, this.result});
+  HomeMovieState({this.loadStatus, this.movie});
 
   HomeMovieState copyWith({
     LoadStatus? loadStatus,
     MovieResponse? movie,
-    Result? result,
   }) {
     return HomeMovieState(
       loadStatus: loadStatus ?? this.loadStatus,
       movie: movie ?? this.movie,
-      result: result ?? this.result,
     );
   }
 
@@ -25,6 +22,5 @@ class HomeMovieState extends Equatable {
   List<Object?> get props => [
     loadStatus,
     movie,
-    result,
   ];
 }

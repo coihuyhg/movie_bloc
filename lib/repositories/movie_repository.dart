@@ -1,10 +1,11 @@
+import 'package:movie_bloc/model/detail_response.dart';
+
 import '../model/movie_response.dart';
 import '../networks/api_client.dart';
 
 abstract class MovieRepository {
   Future<MovieResponse>? getMovie();
-
-  Future<MovieResponse>? getDetailMovie(int movieId);
+  Future<DetailResponse>? getDetailMovie(String movieId);
 }
 
 class MovieRepositoryImpl extends MovieRepository {
@@ -20,7 +21,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<MovieResponse> getDetailMovie(int movieId) async {
-    return await _apiClient.getDetailMovie(movieId);
+  Future<DetailResponse>? getDetailMovie(String movieId) async {
+    return await _apiClient.getDetail(movieId);
   }
 }

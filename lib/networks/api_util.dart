@@ -6,12 +6,12 @@ class ApiUtil {
   late Dio dio;
   late ApiClient apiClient;
 
-  ApiUtil._privateContructor() {
+  ApiUtil._privateConstructor() {
     dio = Dio();
     dio.options.connectTimeout = 15000;
     dio.interceptors.add(ApiInterceptors());
     apiClient = ApiClient(dio, baseUrl: "https://api.themoviedb.org");
   }
 
-  static final ApiUtil instance = ApiUtil._privateContructor();
+  static final ApiUtil instance = ApiUtil._privateConstructor();
 }

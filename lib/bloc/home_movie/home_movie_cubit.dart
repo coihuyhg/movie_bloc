@@ -10,7 +10,7 @@ part 'home_movie_state.dart';
 class HomeMovieCubit extends Cubit<HomeMovieState> {
   MovieRepository movieRepository;
 
-  HomeMovieCubit(this.movieRepository) : super (HomeMovieState());
+  HomeMovieCubit(this.movieRepository) : super(HomeMovieState());
 
   void init() async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
@@ -25,14 +25,4 @@ class HomeMovieCubit extends Cubit<HomeMovieState> {
       emit(state.copyWith(loadStatus: LoadStatus.failure));
     }
   }
-
-  void getDetail(int movieId) async {
-    try {
-      var detail = await movieRepository.getDetailMovie(movieId);
-      emit(state.copyWith(movie: detail));
-    } catch (e) {
-      emit(state.copyWith(loadStatus: LoadStatus.failure));
-    }
-  }
-
 }

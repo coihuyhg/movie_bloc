@@ -8,11 +8,7 @@ import 'bloc/home_movie/home_movie_cubit.dart';
 import 'ui/home.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Movie',
-    home: MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -23,12 +19,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late HomeMovieCubit cubit;
   late ApiClient _apiClient;
 
   @override
   void initState() {
-    cubit = BlocProvider.of<HomeMovieCubit>(context);
     _apiClient = ApiUtil.instance.apiClient;
     // TODO: implement initState
     super.initState();
@@ -37,28 +31,27 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<MovieRepository>(
-          create: (context) {
-            return MovieRepositoryImpl(_apiClient);
-          },
-        )
-      ],
-      child: BlocProvider<HomeMovieCubit>(
-        create: (context) {
-          final repository = RepositoryProvider.of<MovieRepository>(context);
-          return HomeMovieCubit(repository);
-        },
-        child: Builder(
-          builder: (context) {
-            return BlocBuilder<HomeMovieCubit, HomeMovieState>(
-              builder: (context, state) {
-                return Home(state.movie!.results);
+        providers: [
+          RepositoryProvider<MovieRepository>(
+            create: (context) {
+              return MovieRepositoryImpl(_apiClient);
+            },
+          )
+        ],
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<HomeMovieCubit>(
+              create: (context) {
+                final repository =
+                    RepositoryProvider.of<MovieRepository>(context);
+                return HomeMovieCubit(repository);
               },
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          ],
+          child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Home(),
+          ),
+        ));
   }
 }
