@@ -24,8 +24,8 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
         emit(state.copyWith(detail: result, loadStatus: LoadStatus.failure));
       }
     } catch (e, s) {
-      print(e);
-      print(s);
+      print('Huynq error: $e');
+      print('Huynq stack trance: $s');
       emit(state.copyWith(loadStatus: LoadStatus.failure));
     }
   }

@@ -32,14 +32,19 @@ class _DetailMovieState extends State<DetailMovie> {
             buildWhen: (previous, current) =>
                 previous.loadStatus != current.loadStatus,
             builder: (context, state) {
-              return Image(
-                image: CachedNetworkImageProvider(
-                  'https://image.tmdb.org/t/p/original${state.detail?.posterPath ?? ''}',
-                ),
-                height: 634,
-                width: 428,
-                fit: BoxFit.fill,
-              );
+              return state.detail?.posterPath == null
+                  ? const SizedBox(
+                      width: 634,
+                      height: 428,
+                    )
+                  : Image(
+                      image: CachedNetworkImageProvider(
+                        'https://image.tmdb.org/t/p/original${state.detail?.posterPath}',
+                      ),
+                      height: 634,
+                      width: 428,
+                      fit: BoxFit.fill,
+                    );
             },
           ),
           SingleChildScrollView(
@@ -66,8 +71,8 @@ class _DetailMovieState extends State<DetailMovie> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset('assets/icons/ic_line.png'),
-                        const Text(
-                          'abc',
+                        Text(
+                          state.detail?.title ?? '',
                           style: TextStyle(
                             fontSize: 64,
                             fontWeight: FontWeight.w700,
