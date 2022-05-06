@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_bloc/bloc/detail_movie/detail_movie_cubit.dart';
-import 'package:movie_bloc/bloc/home_movie/home_movie_cubit.dart';
 
 class DetailMovie extends StatefulWidget {
   const DetailMovie({Key? key}) : super(key: key);
@@ -67,8 +66,8 @@ class _DetailMovieState extends State<DetailMovie> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.asset('assets/icons/ic_line.png'),
-                        Text(
-                          state.detail?.title ?? '',
+                        const Text(
+                          'abc',
                           style: TextStyle(
                             fontSize: 64,
                             fontWeight: FontWeight.w700,

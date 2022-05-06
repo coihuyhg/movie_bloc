@@ -23,7 +23,9 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
       } else {
         emit(state.copyWith(detail: result, loadStatus: LoadStatus.failure));
       }
-    } catch (e) {
+    } catch (e, s) {
+      print(e);
+      print(s);
       emit(state.copyWith(loadStatus: LoadStatus.failure));
     }
   }
