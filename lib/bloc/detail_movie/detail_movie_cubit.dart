@@ -17,7 +17,6 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     try {
       final result = await detailRepository.getDetailMovie(movieId);
-      print(result);
       if (result != null) {
         emit(state.copyWith(detail: result, loadStatus: LoadStatus.success));
       } else {

@@ -21,7 +21,9 @@ class HomeMovieCubit extends Cubit<HomeMovieState> {
       } else {
         emit(state.copyWith(movie: result, loadStatus: LoadStatus.failure));
       }
-    } catch (e) {
+    } catch (e, s) {
+      print('Huynq error: $e');
+      print('Huynq stack trance: $s');
       emit(state.copyWith(loadStatus: LoadStatus.failure));
     }
   }
